@@ -5,17 +5,22 @@
 	<link rel="stylesheet" type="text/css" href="./res/index.css">
 </head>
 <body>
-	<div>&nbsp;Active directory: '/app'</div>
 	<div class="files">
+		<div>&nbsp;Active directory: '/app'<button style="float: right;">Upload</button></div>
 		<div>&nbsp;&nbsp;File 1</div> 
 		<div>&nbsp;&nbsp;File 2</div> 
 		<div>&nbsp;&nbsp;File 3</div> 
 	</div>
 	<div class="terminal" id="terminal">
-		<div class="terminal-header">&nbsp;&nbsp;Terminal Simulator</div>
-		~$ <input type="text" name="" placeholder="scp" /><br>
-		~$ <input type="text" name="" placeholder="ls" disabled="true" /><br>
-		~$ <input type="text" name="" />
+		<div class="terminal-header">
+			<span class="terminal-active">&nbsp;&nbsp;Terminal Simulator<span>
+		</div>
+		<div class="cmd">
+			~$ <input type="text" name="" placeholder="scp" /><br>
+			~$ <input type="text" name="" placeholder="ls" disabled="true" /><br>
+			~$ <input type="text" name="" placeholder="ls" disabled="true" /><br>
+			~$ <input type="text" name="" />
+		</div>
 	</div>
 	<script type="text/javascript" src="./res/index.js"></script>
 </body>
