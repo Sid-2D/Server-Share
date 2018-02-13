@@ -7,7 +7,11 @@ window.onload = () => {
 	let cmd = document.querySelector('.cmd')
 
 	socket.on('cmd-response', response => {
-		let response = document.createTextNode(`~$ ${response}<br />`)
-		cmd.appendChild(response)
+		cmd.innerHTML += `<br />~$ ${response}`
 	})
+	
+	setTimeout(() => {
+		console.log(socket)
+		socket.emit('command', 'hello');
+	}, 1000)
 }

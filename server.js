@@ -3,13 +3,14 @@ const express = require('express'),
 	{ spawn } = require('child_process'),
 	fs = require('fs'),
 	bodyParser = require('body-parser'),
-	http = require('http').Server(app)
+	http = require('http').Server(app),
+	io = require('socket.io')(http)
 
 app.use(bodyParser.json());
 
 app.use(express.static('front-end'))
 
-io.on('terminal-connection', socket => {
+io.on('connection', socket => {
 	console.log('A terminal connected.');
 	socket.on('disconnect', () => {
 	    console.log('terminal disconnected');
