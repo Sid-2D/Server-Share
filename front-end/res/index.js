@@ -1,17 +1,34 @@
 window.onload = () => {
-	document.querySelector('input:last-child').focus()
+	const socket = io()
+
 	document.querySelector('.files').style.height = (document.innerHeight - 250) + 'px'
 
-	const socket = io()
-	let input = document.querySelector('input:last-child')
+	document.querySelector('form:last-child').onsubmit = event => {
+		event.preventDefault()
+		socket.emit('command', document.querySelector('input:last-child').value)
+		this.onsubmit = e => e.preventDefault()
+	}
+
+	document.querySelector('input:last-child').focus()
+
 	let cmd = document.querySelector('.cmd')
 
 	socket.on('cmd-response', response => {
-		cmd.innerHTML += `<br />~$ ${response}`
+		let div = document.createElement('div')
+		div.innerHTML = `~$ ${response}`
+		cmd.appendChild(div)	
 	})
-	
-	setTimeout(() => {
-		console.log(socket)
-		socket.emit('command', 'hello');
-	}, 1000)
+
+	socket.on('cmd-end', response => {
+		let form = document.createElement('form')
+		form.innerHTML = '~$ <input id="m" autocomplete="off" />'
+		cmd.appendChild(form)
+		cmd.querySelector('input:last-child').setAttribute('disabled', 'true')
+		form.onsubmit = event => {
+			event.preventDefault()
+			socket.emit('command', form.querySelector('input').value)
+			form.onsubmit = e => e.preventDefault()
+		}
+		form.querySelector('input').focus()		
+	})
 }

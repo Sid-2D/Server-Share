@@ -18,6 +18,7 @@ io.on('connection', socket => {
 	socket.on('command', cmd => {
 		console.log('Execute:', cmd)
 	    io.emit('cmd-response', `${cmd} executed`)
+	    io.emit('cmd-end', '')
     })
 });
 
