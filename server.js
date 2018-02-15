@@ -16,11 +16,23 @@ io.on('connection', socket => {
 	    console.log('terminal disconnected');
 	})
 	socket.on('command', cmd => {
-		console.log('Execute:', cmd)
-	    io.emit('cmd-response', `${cmd} executed`)
-	    io.emit('cmd-end', '')
+		executeCommand(cmd)
     })
-});
+})
+
+function executeCommand(cmd) {
+	let cmdArray = cmd.split(' ')
+	const childProcess = spawn(cmdArray[0], cmdArray.slice(1) || '')
+	childProcess.stdout.on('data', data => {
+	    io.emit('cmd-response', data.toString())
+	})
+	childProcess.stderr.on('data', data => {
+	    io.emit('cmd-response', data)
+	})
+	childProcess.on('close', code => {
+	    io.emit('cmd-end', code)
+	})
+}
 
 http.listen(process.env.PORT || 3006, (err) => {
 	console.log('Listening on port:', process.env.PORT || 3006)
