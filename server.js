@@ -4,11 +4,23 @@ const express = require('express'),
 	fs = require('fs'),
 	bodyParser = require('body-parser'),
 	http = require('http').Server(app),
-	io = require('socket.io')(http)
+	io = require('socket.io')(http),
+	multer = require('multer')
 
 app.use(bodyParser.json());
 
 app.use(express.static('front-end'))
+
+// app.post('/file-upload', (req, res) => {
+//     console.log("here")
+//     console.log(req.body)
+//     console.log(req.files)
+// })
+
+app.post('/file-upload', multer({dest: 'uploads/'}).single('file'), (req, res) => {
+	console.log('here')
+	res.send(json)
+})
 
 io.on('connection', socket => {
 	console.log('A terminal connected.');

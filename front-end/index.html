@@ -6,7 +6,13 @@
 </head>
 <body>
 	<div class="files">
-		<div>&nbsp;Active directory: '/app'<button style="float: right;">Upload</button></div>
+		<div>
+			&nbsp;Active directory: '/app'
+			<form method="POST" action="/upload" style="float: right;">
+				<input type="file" name="file">
+				<input type="submit">
+			</form>
+		</div>
 		<div>&nbsp;&nbsp;File 1</div> 
 		<div>&nbsp;&nbsp;File 2</div> 
 		<div>&nbsp;&nbsp;File 3</div> 

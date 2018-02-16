@@ -20,7 +20,7 @@ body {
 	height: 90%;
 }
 
-input {
+.terminal input {
 	background: #000;
 	border: 0;
 	color: #5f5;
