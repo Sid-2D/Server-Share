@@ -3,10 +3,9 @@ window.onload = () => {
 
 	document.querySelector('.files').style.height = (document.innerHeight - 250) + 'px'
 
-	document.querySelector('form:last-child').onsubmit = event => {
+	document.querySelector('.terminal form:last-child').onsubmit = event => {
 		event.preventDefault()
-		socket.emit('command', document.querySelector('input:last-child').value)
-		this.onsubmit = e => e.preventDefault()
+		socket.emit('command', document.querySelector('.terminal input:last-child').value)
 	}
 
 	document.querySelector('input:last-child').focus()
