@@ -15,11 +15,13 @@ app.use(express.static('front-end'))
 //     console.log("here")
 //     console.log(req.body)
 //     console.log(req.files)
+//     res.send('done')
 // })
 
 app.post('/file-upload', multer({dest: 'uploads/'}).single('file'), (req, res) => {
 	console.log('here')
-	res.send(json)
+    console.log(req.file)
+	res.send('done')
 })
 
 io.on('connection', socket => {
