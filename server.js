@@ -24,6 +24,16 @@ app.post('/file-upload', multer({dest: 'uploads/'}).single('file'), (req, res) =
 	res.send('done')
 })
 
+app.get('/contents', (req, res) => {
+	fs.readdir(__dirname + '/uploads', (err, items) => {
+	    console.log(items)
+	    for (let i = 0; i < items.length; i++) {
+	        console.log(items[i])
+	    }
+		res.send(items)
+	})
+})
+
 io.on('connection', socket => {
 	console.log('A terminal connected.');
 	socket.on('disconnect', () => {
