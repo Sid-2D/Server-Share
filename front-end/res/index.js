@@ -30,4 +30,28 @@ window.onload = () => {
 		}
 		form.querySelector('input').focus()		
 	})
+
+	showFiles()
+}
+
+function showFiles() {
+	const fileSection = document.getElementById('uploads')
+	const xhr = new XMLHttpRequest()
+	xhr.addEventListener('load', addFiles)
+	xhr.open('GET', '/contents')
+	xhr.send()
+
+	function addFiles() {
+		fileSection.innerHTML = ''
+		const files = JSON.parse(xhr.response)
+		files.forEach((file, index) => {
+			let div = document.createElement('div')
+			div.innerHTML = `&nbsp;&nbsp;${index + 1}.&nbsp;&nbsp;`
+			let a = document.createElement('a')
+			a.innerHTML = file
+			a.setAttribute('href', `/files/${file}`)
+			div.appendChild(a)
+			fileSection.appendChild(div)
+		})
+	}
 }

@@ -11,6 +11,8 @@ app.use(bodyParser.json());
 
 app.use(express.static('front-end'))
 
+app.use('/files', express.static('uploads'))
+
 // app.post('/file-upload', (req, res) => {
 //     console.log("here")
 //     console.log(req.body)
@@ -26,11 +28,11 @@ app.post('/file-upload', multer({dest: 'uploads/'}).single('file'), (req, res) =
 
 app.get('/contents', (req, res) => {
 	fs.readdir(__dirname + '/uploads', (err, items) => {
+		if (err) {
+			console.log(err)
+		}
 	    console.log(items)
-	    for (let i = 0; i < items.length; i++) {
-	        console.log(items[i])
-	    }
-		res.send(items)
+		res.send(JSON.stringify(items || []))
 	})
 })
 

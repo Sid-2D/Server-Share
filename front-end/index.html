@@ -7,15 +7,13 @@
 <body>
 	<div class="files">
 		<div>
-			&nbsp;Active directory: '/app'
+			&nbsp;Uploaded files:
 			<form method="POST" action="/file-upload" enctype="multipart/form-data" style="float: right;">
 				<input type="file" name="file">
 				<input type="submit">
 			</form>
 		</div>
-		<div>&nbsp;&nbsp;File 1</div> 
-		<div>&nbsp;&nbsp;File 2</div> 
-		<div>&nbsp;&nbsp;File 3</div> 
+		<div id="uploads"></div>
 	</div>
 	<div class="terminal" id="terminal">
 		<div class="terminal-header">
