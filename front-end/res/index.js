@@ -10,6 +10,21 @@ window.onload = () => {
 
 	document.querySelector('input:last-child').focus()
 
+	const uploadForm = document.querySelector('#uploader')
+	uploadForm.onsubmit = e => {
+		e.preventDefault()
+		let xhr = new XMLHttpRequest()
+		const formData = new FormData(uploadForm)
+		xhr.addEventListener('load', postFile)
+		xhr.open('POST', '/file-upload')
+		xhr.send(formData)
+
+		function postFile() {
+			console.log('done')
+			showFiles()
+		}
+	}
+
 	let cmd = document.querySelector('.cmd')
 
 	socket.on('cmd-response', response => {
