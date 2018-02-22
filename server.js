@@ -20,8 +20,14 @@ app.use('/files', express.static('uploads'))
 //     res.send('done')
 // })
 
-app.post('/file-upload', multer({dest: 'uploads/'}).single('file'), (req, res) => {
-	console.log('here')
+app.post('/file-upload', multer({storage: multer.diskStorage({
+	destination: (req, file, next) => {
+		next(null, __dirname + '/uploads')
+	},
+	filename: (req, file, next) => {
+		next(null, file.originalname)
+	}
+})}).single('file'), (req, res) => {
     console.log(req.file)
 	res.send('done')
 })
