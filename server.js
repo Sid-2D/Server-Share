@@ -55,11 +55,17 @@ io.on('connection', socket => {
 function executeCommand(cmd) {
 	let cmdArray = cmd.split(' ')
 	const childProcess = spawn(cmdArray[0], cmdArray.slice(1) || '')
+	console.log(cmdArray[0])
+	console.log(cmdArray.slice(1) || '')
 	childProcess.stdout.on('data', data => {
 	    io.emit('cmd-response', data.toString())
 	})
 	childProcess.stderr.on('data', data => {
 	    io.emit('cmd-response', data)
+	})
+	childProcess.on('error', err => {
+		console.log(err)
+	    io.emit('cmd-end', err)
 	})
 	childProcess.on('close', code => {
 	    io.emit('cmd-end', code)
