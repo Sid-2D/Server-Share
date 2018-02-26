@@ -36,7 +36,9 @@ window.onload = () => {
 	socket.on('cmd-end', response => {
 		let form = document.createElement('form')
 		form.innerHTML = '~$ <input id="m" autocomplete="off" />'
-		cmd.appendChild(form)
+		if (response.type !== 'error') {
+			cmd.appendChild(form)
+		}
 		cmd.querySelector('input:last-child').setAttribute('disabled', 'true')
 		form.onsubmit = event => {
 			event.preventDefault()

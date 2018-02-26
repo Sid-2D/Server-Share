@@ -65,10 +65,16 @@ function executeCommand(cmd) {
 	})
 	childProcess.on('error', err => {
 		console.log(err)
-	    io.emit('cmd-end', err)
+	    io.emit('cmd-end', {
+	    	type: 'error',
+	    	message: err
+	    })
 	})
 	childProcess.on('close', code => {
-	    io.emit('cmd-end', code)
+	    io.emit('cmd-end', {
+	    	type: 'success',
+	    	message: `code: ${code}`
+	    })
 	})
 }
 
