@@ -37,7 +37,12 @@ window.onload = () => {
 		let form = document.createElement('form')
 		form.innerHTML = '~$ <input id="m" autocomplete="off" />'
 		if (response.type !== 'error') {
+			let span = document.createElement('span')
 			cmd.appendChild(form)
+		} else {
+			let span = document.createElement('span')
+			span.innerHTML = `~$ Error`
+			cmd.appendChild(span)
 		}
 		cmd.querySelector('input:last-child').setAttribute('disabled', 'true')
 		form.onsubmit = event => {
