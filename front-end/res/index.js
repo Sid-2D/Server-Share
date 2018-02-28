@@ -35,7 +35,9 @@ window.onload = () => {
 
 	socket.on('cmd-end', response => {
 		let form = document.createElement('form')
-		form.innerHTML = '~$ <input id="m" autocomplete="off" />'
+		form.innerHTML = '~$ <input autocomplete="off" spellcheck="false" style="overflow-x: scroll; overflow-y: hidden; width: 70vw; " />'
+		form.style.padding = '0px'
+		form.style.margin = '0px'
 		if (response.type !== 'error') {
 			let span = document.createElement('span')
 			cmd.appendChild(form)

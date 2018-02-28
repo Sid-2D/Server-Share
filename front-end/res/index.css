@@ -90,6 +90,16 @@ textarea:focus, input:focus{
 	background-color: #5a5;
 }
 
+input::-webkit-scrollbar,
+input::-webkit-scrollbar-track,
+input::-webkit-scrollbar-thumb
+{
+	max-width: 0px;
+	max-height: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
 .cmd input::selection {
 	background-color: #ccc;
 }
