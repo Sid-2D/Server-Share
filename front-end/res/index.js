@@ -28,8 +28,11 @@ window.onload = () => {
 	let cmd = document.querySelector('.cmd')
 
 	socket.on('cmd-response', response => {
+		console.log(response)
 		let div = document.createElement('div')
-		div.innerHTML = `~$ ${response}`
+		div.innerHTML = `&nbsp;${response.replace(/ /g, '&nbsp;')
+								   .replace(/\n/g, '<br>&nbsp;')
+								   .replace(/<br>&nbsp;$/, '')}`
 		cmd.appendChild(div)	
 	})
 

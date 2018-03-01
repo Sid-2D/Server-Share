@@ -58,10 +58,12 @@ function executeCommand(cmd) {
 	console.log(cmdArray[0])
 	console.log(cmdArray.slice(1) || '')
 	childProcess.stdout.on('data', data => {
+		console.log(data.toString())
 	    io.emit('cmd-response', data.toString())
 	})
 	childProcess.stderr.on('data', data => {
-	    io.emit('cmd-response', data)
+		console.log(data.toString())
+	    io.emit('cmd-response', data.toString())
 	})
 	childProcess.on('error', err => {
 		console.log(err)
