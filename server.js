@@ -54,7 +54,9 @@ io.on('connection', socket => {
 
 function executeCommand(cmd) {
 	let cmdArray = cmd.split(' ')
-	const childProcess = spawn(cmdArray[0], cmdArray.slice(1) || '')
+	const childProcess = spawn(cmdArray[0], cmdArray.slice(1) || '', {
+		cwd: __dirname + '/uploads'
+	})
 	console.log(cmdArray[0])
 	console.log(cmdArray.slice(1) || '')
 	childProcess.stdout.on('data', data => {
